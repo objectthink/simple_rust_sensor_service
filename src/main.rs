@@ -97,9 +97,14 @@ async fn main() -> Result<(), async_nats::Error> {
                 info!("requesting location for {}", sensor_id);
 
                 // get the requested sensor location from sensors
+                // TODO if let/ match in case we haven;t seen sensor and location is not found
                 let sensor = sensors_get.lock().unwrap().get(&sensor_id).unwrap().clone();
 
                 info!("location for sensor {:#?} is {:#?}", sensor, sensor.location);
+
+                // reply to request with location
+                // TODO check for errors
+                client.publish(message.reply.unwrap(), sensor.location.into()).await.unwrap();
             }
 
             Ok::<(), async_nats::Error>(())
