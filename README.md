@@ -1,0 +1,1 @@
+create a "service" in rust that while running will listen for sensor location changes and store them in a file.  when a sensor is initialized it first will send a request the the topic this service is listening to to get the last stored location for this sensor ( bedroom, familyroom, etc. ) so that it will be initialized with the last saved location.
